@@ -1,0 +1,44 @@
+/* Center the entire page content */
+.page-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f5f5f5;
+  }
+  
+  /* Width settings for the inner container */
+  .inner-container {
+    width: 80%;
+    max-width: 1200px;
+  }
+  
+  /* Card styling */
+  .card-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+    height: 200px; /* Make the cards square-shaped */
+  }
+  
+  /* Typography styling for the card title */
+  .card-title {
+    text-align: center;
+  }
+  
+  /* Icon alignment */
+  .icon-box {
+    display: flex;
+    justify-content: center;
+    margin-top: 8px;
+  }
+  
+  /* Button alignment */
+  .button-box {
+    display: flex;
+    justify-content: center;
+    margin-top: 16px;
+  }
+  
