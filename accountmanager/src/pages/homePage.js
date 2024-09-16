@@ -6,6 +6,7 @@ import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
 import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined';
 import './homepage.css'; // Import CSS
 import AddAccount from './AddAccount.js'; 
+import Layout from '../Layout/layout.js';
 const HomePage = () => {
   const [open, setOpen] = useState(false);  
   const navigate = useNavigate();
@@ -22,6 +23,8 @@ const HomePage = () => {
   };
 
   return (
+    // Add Layout component
+    <Layout>
     <div className="page-container">
       <div className="inner-container">
         <Grid container spacing={3} justifyContent="center" alignItems="center">
@@ -92,6 +95,7 @@ const HomePage = () => {
         </DialogContent>
       </Dialog>
     </div>
+    </Layout>
   );
 };
 export default HomePage;

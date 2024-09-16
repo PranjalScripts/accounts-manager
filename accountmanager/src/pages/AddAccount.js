@@ -1,120 +1,53 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './AddAccount.css';
+import { TextField, Button, Box, Typography, MenuItem, Select, FormControl, InputLabel } from '@mui/material';
 
 const AddAccount = () => {
-  const [option, setOption] = useState('predefined');
-  const [accountName, setAccountName] = useState('');
-  const [accountFor, setAccountFor] = useState('');
   const [profileName, setProfileName] = useState('');
-  const [loginUrl, setLoginUrl] = useState('');
+  const [platform, setPlatform] = useState('');
 
-  const navigate = useNavigate(); // useNavigate hook for programmatic navigation
+  const navigate = useNavigate();
+
+  const handleProfileNameChange = (e) => {
+    setProfileName(e.target.value);
+  };
+
+  const handlePlatformChange = (e) => {
+    setPlatform(e.target.value);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (option === 'predefined') {
-      console.log({ accountName, accountFor });
-    } else {
-      console.log({ profileName, loginUrl });
-    }
-  };
-
-  const handleAccountClick = (platform) => {
-    navigate(`/redirect/${platform}`); // Redirect to your internal redirect page
+    // Pass the profile name and platform to the Profiles page
+    navigate('/profiles', { state: { profileName, platform } });
   };
 
   return (
-    <div className="container">
-      <h1>Add New Account</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>
-            <input
-              type="radio"
-              name="option"
-              value="predefined"
-              checked={option === 'predefined'}
-              onChange={() => setOption('predefined')}
-            />
-            Predefined Account
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="option"
-              value="custom"
-              checked={option === 'custom'}
-              onChange={() => setOption('custom')}
-            />
-            Custom Profile
-          </label>
-        </div>
-
-        {option === 'predefined' && (
-          <>
-            <div>
-              <label htmlFor="accountName">Account Name:</label>
-              <input
-                type="text"
-                id="accountName"
-                value={accountName}
-                onChange={(e) => setAccountName(e.target.value)}
-                required
-              />
-            </div>
-            <div>
-              <label htmlFor="accountFor">Account For:</label>
-              <select
-                id="accountFor"
-                value={accountFor}
-                onChange={(e) => setAccountFor(e.target.value)}
-                required
-              >
-                <option value="">Select a platform</option>
-                <option value="facebook">Facebook</option>
-                <option value="x">X (formerly Twitter)</option>
-                <option value="instagram">Instagram</option>
-                <option value="whatsapp">WhatsApp</option>
-              </select>
-            </div>
-          </>
-        )}
-
-        {option === 'custom' && (
-          <>
-            <div>
-              <label htmlFor="profileName">Profile Name:</label>
-              <input
-                type="text"
-                id="profileName"
-                value={profileName}
-                onChange={(e) => setProfileName(e.target.value)}
-                required
-              />
-            </div>
-            
-            <div>
-              <label htmlFor="loginUrl">Login URL:</label>
-              <input
-                type="url"
-                id="loginUrl"
-                value={loginUrl}
-                onChange={(e) => setLoginUrl(e.target.value)}
-                required
-              />
-            </div>
-          </>
-        )}
-
-        <button type="submit">Add Account</button>
-
-        {/* Button to navigate to the Instagram login redirect */}
-        <button type="button" onClick={() => handleAccountClick('instagram')}>
-          Go to Instagram Login
-        </button>
-      </form>
-    </div>
+    <Box component="form" onSubmit={handleSubmit} sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+      <Typography variant="h5">Create New Profile</Typography>
+      <TextField 
+        label="Profile Name" 
+        value={profileName} 
+        onChange={handleProfileNameChange} 
+        fullWidth 
+        required 
+      />
+      <FormControl fullWidth>
+        <InputLabel>Platform</InputLabel>
+        <Select
+          value={platform}
+          onChange={handlePlatformChange}
+          required
+        >
+          <MenuItem value="Instagram">Instagram</MenuItem>
+          <MenuItem value="WhatsApp">WhatsApp</MenuItem>
+          {/* Add more platforms as needed */}
+        </Select>
+      </FormControl>
+      <Button type="submit" variant="contained" color="primary">
+        Create Profile
+      </Button>
+    </Box>
   );
 };
 
